@@ -8,7 +8,7 @@ But somewhat older data has its value, especially because we expect Google to ma
 
 So, how do we capitalize on Google Steet View data? We can download all the data for a city. But doing that is [expensive](https://developers.google.com/maps/documentation/streetview/usage-and-billing). And it may not even be useful. Depending on the question, a large random sample can fill in nicely for a census. What we need then is a way to randomly sample locations on the streets. 
 
-[geo_sampling](https://github.com/soodoku/geo_sampling/) solves that exact problem. The package implements the following workflow: it downloads the Open Street Maps data for the city, chunks the roads into .5km segments, and randomly samples from the segments. We pair [geo_sampling](https://github.com/soodoku/geo_sampling/) with Google Street View to do shed light on the condition of roads in a few cities, and to learn the association between income and condition of the roads.
+[geo_sampling](https://github.com/soodoku/geo_sampling/) solves that exact problem. The package implements the following workflow: it downloads the Open Street Maps data for the city, chunks the roads into .5km segments, and randomly samples from the segments. We pair [geo_sampling](https://github.com/soodoku/geo_sampling/) with Google Street View to shed light on the condition of roads in a few cities, and to learn the association between income and condition of the roads.
 
 ### Learning About the Condition of the Roads
 
@@ -22,7 +22,7 @@ In all, we have data on 978 photos for Bangkok, 872 for Jakarta, 999 for Lagos, 
 
 ### What did we learn?
 
-The proportion of road segments with potholes is Jakarta is an astonishing .39. The commensurate number for Bangkok, Lagos, and Wayne is between .06--.07. But what does that mean? As we mentioned above, each image captures a small segment of the street. If we assume that a photo captures .5km, the expected number of potholes on a 10 km journey in Jakarta would be 3.9. That would make for a somewhat of a rough ride.
+The proportion of road segments with potholes is Jakarta is an astonishing .39. The commensurate number for Bangkok, Lagos, and Wayne is between .06--.07. But what does that mean? As we mentioned above, each image captures a small segment of the street. If we assume that a photo captures .5km, the expected number of potholes on a 10 km journey in Jakarta would be 3.9. That would make for somewhat of a rough ride.
 
 When it comes to cracks in the road, Wayne takes the top spot---the proportion of segments in Wayne with cracks is .62 followed by early to mid-twenties for the rest of the three cities. This is not particularly surprising given Wayne's latitude. 
 
