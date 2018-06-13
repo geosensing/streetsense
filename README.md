@@ -79,7 +79,7 @@ Next, we analyzed the relationship between condition of the roads and local inco
 
 * Analysis:  
     - [Cross-city comparison](scripts/mturk_streetview.ipynb)
-    - [Road Conditions in Wayne by Income, etc.](scripts/wayne_by_income.ipynb)
+    - [Road Conditions in Wayne by Income, etc.](scripts/wayne_income.ipynb)
 
 ### Authors
 
