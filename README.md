@@ -1,4 +1,4 @@
-## Street Sense: Learning from Randomly Sampled Locations on Google Street View
+## Street Sense: Learning from Google Street View
 
 What is the condition of the streets? Are the streets paved? Do the streets have proper traffic signs and road markings? Is there litter on the streets? What proportion of vehicles on the streets is two-wheeled? And what proportion is man-powered, e.g., rickshaws? These are some of many the questions we can answer with [Google Street View](https://www.google.com/streetview/). 
 
