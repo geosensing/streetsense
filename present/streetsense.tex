@@ -1,8 +1,8 @@
 \documentclass[compress]{beamer}
-\setbeamercolor{normal text}{fg=white}
+\setbeamercolor{normal text}{fg=black}
 \setbeamercovered{transparent, still covered={\opaqueness<1->{0}}, again covered={\opaqueness<1->{30}}}
-\beamertemplatesolidbackgroundcolor{black}
-\usecolortheme[named=white]{structure}
+\beamertemplatesolidbackgroundcolor{white}
+\usecolortheme[named=black]{structure}
 \usepackage{caption}
 \captionsetup{labelformat=empty}
 \setbeamertemplate{navigation symbols}{}
@@ -22,6 +22,8 @@
 \usepackage{wrapfig}
 \usefonttheme[onlymath]{serif}
 \usepackage{cmbright}
+\usepackage{booktabs}
+\usepackage{longtable}
 
 \def\labelitemi{\textemdash}
 \setbeamertemplate{frametitle}{
@@ -31,8 +33,8 @@
 		\par
 	\end{centering}
 }
-\title[Names]{\\ \vspace{10mm} learning from names}
-\author[Sood and Laohaprapanon]{kim, gaurav, and suriyan}
+\title[Street Sense]{\\ \vspace{10mm} street sense: learning from google streetview}
+\author[Laohaprapanon, Ortleb, and Sood]{kim, gaurav, and suriyan}
   \large
 \date[2020]{}
 \subject{Paper}
@@ -63,233 +65,125 @@ setwd(basedir)
 
 \frame{
 
-\Large{Why Learn From Names?}
+\frametitle{Why Learn About the Public Infrastructure?}
+\pause
+\only<2->{\Large{Worse the quality of the public infrastructure, generally, the worse the quality of life.}}
+	\begin{large_enum}
+  	\item[-]<3-> Potholed roads $\leadsto$ slower speeds, bumpier ride
+	  \item[-]<4-> Unpaved sidewalks $\leadsto$ physically disabled have tougher time
+  	\item[-]<5-> Garbage $\leadsto$ foul smells, greater risk of disease
+	\end{large_enum}
+}
+
+\frame{
+
+\Large{Learning About The Quality of Streets}
 \pause
 
 \begin{large_enum}
-	\item[-]<2>Because sometimes all you have is names
-	\item[-]<3->\alert<4>{Media}, most voter lists, \ldots
-\end{large_enum}
-}
-
-\frame{
-	\texttt{WASHINGTON --- Some of \alert<2>{Robert S. Mueller III's} investigators have told associates that Attorney General \alert<2>{William P. Barr} failed to adequately portray the findings of their inquiry and that they were more troubling for President Trump than Mr. Barr indicated, according to government officials and others familiar with their simmering frustrations.}\\
-
-	\vspace{20mm}
-	\small{Source: The New York Times}
-}
-
-\frame{
-\Large{Why Learn From Names?}
-\begin{large_enum}
-	\item[-]<0>Because sometimes all you have are names
-	\item[-]<0>Media, most voter lists, \ldots
-	\item[-]<2-6>But you want to:
-		\begin{itemize}
-			\item[-]<3->Highlight biases
-			\item[-]<4->Fight biases
-			\item[-]<5->Prevent biases (Regress Out)
-			\item[-]<6->Personalize
-		\end{itemize}
-	\item[-]<7-11>Concretely:
-		\begin{itemize}
-			\item[-]<8->Biases in media coverage: who is (covered) cited as a source?, \ldots
-			\item[-]<9->Fairness in lending
-			\item[-]<10->Political accountability: whose emails are read?, \ldots
-			\item[-]<11->Personalization---recommending same race doctor (Alsan et al. 2018)
-		\end{itemize}
+	\item[-]<2>Open Street Maps (OSM) for data on roads
+	\item[-]<3>Chunk each road into .5 km segments
+	\item[-]<4>Randomly sample from the segments
+	\item[-]<5>Google Street View API for lat/long of top-left of the segment with fixed direction of camera
+	\item[-]<6>Concern: Google Streetview doesn't have adequate coverage. Dhaka --- 24.6\%
 	\end{large_enum}
 }
 
 \frame{
-
-\Large{Why \only<2->{\alert{Not}} Learn From Names?}
-\pause
-
-\begin{large_enum}
-	\item[-]<3> Instrument for Discrimination
-	\item[-]<4> But that risk exists for credit risk scoring too.
-	\item[-]<5> To enable predatory lending
-	\item[-]<6> But still a concern \ldots
-\end{large_enum}
-}
-
-\frame{
-
-\Large{But if we were to learn from names, how would we?}
-\pause
-
-\begin{large_enum}
-	\item[-]<2>$p\;(\text{ethnicity\;}|\;\text{name})$?
-	\item[-]<3> Classify to the majority class
-	\item[-]<4> Makes the least mistakes---Bayes Optimal Error
-	\item[-]<5-6> Census Last Name Dataset
-		\begin{itemize}
-			\item[-]<6->Split by race for 1,000 most common last names
-		\end{itemize}
-	\end{large_enum}
-}
-
-{
-\setbeamercolor{background canvas}{bg=white}
-\begin{frame}
-	\center{{\scalebox{0.6}{\includegraphics{census.png}}}}
-\end{frame}
-}
-
-\frame{
-
-\Large{But if were to learn from names, how would we?}
-\begin{large_enum}
-	\item[-]<0>$p\;(\text{ethnicity\;}|\;\text{name})$?
-	\item[-]<0> Classify to the majority class
-	\item[-]<0> Makes the least mistakes if that is all you have
-	\item[-]<0-> Census Last Name Dataset
-		\begin{itemize}
-			\item[-]<1->Split by race for \alert<2>{1,000} most common last names
-		\end{itemize}
-\end{large_enum}
-}
-
-\frame{
-
-\Large{\only<1>{Problems}\only<2>{\sout{\alert{Problems}}}\only<3->{Opportunities}}
-\begin{large_enum}
-  \item[-]<4> Classifying the other 160k+ last names
-  \item[-]<5-6> When we have more than the last name\\
-  \only<6->{\normalsize{e.g., African-Americans have more distinctive first names}}
-  \item[-]<7> When we have minor variations
-  \item[-]<8> Geographic variation
-\end{large_enum}
-}
-
-\frame{
-\only<1->{\Large{How to capitalize on the opportunities?}}
-\begin{large_enum}
-  \item[-]<2> Patterns in names
-  \item[-]<3> Capturing sounds, sequence of sounds, \ldots
-  \item[-]<4-6> Phonemes are dead. Long live bi-chars! \\
-  \only<5->{\normalsize{\texttt{da\_as\_sh\_ia\_an,}} \only<6->{\texttt{jo\_oh\_ha\_an\_ns\_so\_on}}}
-  \item[-]<7> Patterns in communication networks, e.g., Skiena et al. 2018.
-\end{large_enum}
-}
-
-\frame{
-\Large{How to Classify Text\\}
-
-\begin{large_enum}
-   \item[-]<1-5> Text $\leadsto$ Embeddings $\leadsto$ Classifier
-		\begin{enumerate}
-			\item[-]<2-> Embeddings leverage the adage:\\
-						  You are the company you keep.
-			\item[-]<3-> Use a large corpus
-			\item[-]<4-> Learn the context well
-			\item[-]<5-> Preserve tens of hundreds of vectors and pass them to a model
-	    \end{enumerate}
-
-	\item[-]<6->In Our Case:
-		\begin{enumerate}
-			\item[-]<7-> Embeddings of common bi-chars
-			\item[-]<8-> LSTM
-		\end{enumerate}
-	\end{large_enum}
-}
-
-\frame{
-
-\Large{But what do you mean by race and ethnicity? \vspace{5mm}}
-\begin{large_enum}
-	\item[-]<2-3> How would I describe myself?\\
-				\only<3->{\normalsize{Indian? But there is systematic variation across names across linguistic groups within India.}}
-	\item[-]<4> Are you willing to fight for the \texttt{group}?
-	\item[-]<5> How people describe themselves in free text?
-	\item[-]<6> What do people choose when asked to force-fit into administrative categories?
-\end{large_enum}
-}
-
-\frame{
-\Large{Data}
-\begin{large_enum}
-		 \item[-]<2-> Voting Registration data from Florida\\
-
-		 \item[-]<3-> Race/Ethnicity = Asian or Pacific Islander, Hispanic, NH Black, NH White
-		 \item[-]<4-> Wikipedia $\sim$ Famous people but more finely coded race
-	\end{large_enum}
-}
-
-\frame{
-\Large{Success Using Florida Voter Registration Data}
-\only<2->{
-		\begin{table}[!htb]
-		\small
-		\centering
-		\begin{tabular}{|cc|cc|}
-			\hline
-			   			& 		 & \multicolumn{2}{c|}{\textbf{F1-Score}} \\
-			   			& 		 & Last Name 			& Full Name\\[0.5ex]
-				\cline{2-4}
-				\textbf{Race}    & Asian      &   .54     & .60\\[0.5ex]
-				        	     & Hispanic   &   .72     & .75\\[0.5ex]
-				        	     & \alert<2-3>{NH Black}   &   \alert<2-3>{.32}     & \alert<3>{.55}\\[0.5ex]
-				        	     & NH White   &   .88     & .90\\[0.5ex]
-			    \hline
-		\end{tabular}
-		\end{table}
-		}
-}
-
-\frame{
-\Large{\only<1>{Donations to Political Campaigns in 2000 and 2010 by Race and Ethnicity}}
-\only<2->{
-\begin{table}[h!]
+\begin{figure}[H]
 \centering
-\begin{tabular}{ l c c c c}
-\hline
-         & \multicolumn{2}{c}{Census} & \multicolumn{2}{c}{Florida}\\
-\hline
-     &     2000     & 2010     &    2000    & 2010\\
-\hline
-asian    &     2.2\%   & 2.7\%   &   2.0\%   & 2.3\%\\
-black    &     11.0\%  & 10.2\%  &   8.9\%   & 7.9\%\\
-hispanic &     \alert<2-3>{3.2\%}   & \alert<2-3>{4.3\%}   &   \alert<2-3>{3.2\%}   & \alert<2-3>{3.3\%}\\
-white    &     83.5\%  & 82.7\%  &   85.8\%  & \alert<3>{86.5\%}\\
-\hline
-\end{tabular}
-\label{table:percentage_contrib_by_race}
-\end{table}
-}
+\caption{Sampled Locations in Wayne, MI}\label{fig:wayne2_sample}
+\includegraphics[scale=0.2]{../figs/wayne2.pdf}
+\end{figure}
 }
 
 \frame{
-	\frametitle{Python Package}
-\begin{lstlisting}
-# pip install ethnicolr
-
-> import pandas as pd
-
-> from ethnicolr import census\_ln, pred\_census\_ln \\
-Using TensorFlow backend.
-
-> names = [{`name': `smith'}, \\
-...         {`name': `zhang'}, \\
-...         {`name': `jackson'}] \\
-
-> df = pd.DataFrame(names)
-
-> census\_ln(df, `name', 2010) \\
-\end{lstlisting}
-
-\begin{table}[h!]
+\begin{figure}[H]
 \centering
-\begin{tabular}{ l llll}
-name     &   race   & pctwhite &  pctblack & pctapi\\
-smith    &   white  &  70.9    &  23.11    & 0.5\\
-zhang    &   api 	& 0.99     &  0.16     & 98.06\\
-jackson  &   black 	& 39.89    &  53.04    & 0.39\\
+\caption{Sampled Locations in Wayne} \label{google_wayne2}
+    \includegraphics[width=\textwidth]{../figs/wayne2-gmap.png}
+\end{figure}
+}
+
+\frame{
+\begin{figure}[H]
+\centering
+\caption{Sampled Locations in Bangkok} \label{fig:google_bangkok}
+    \includegraphics[width=\textwidth]{../figs/bangkok-gmap.png}
+\end{figure}
+}
+
+\frame{
+\begin{figure}[H]
+\centering
+\caption{Sampled Locations in Jakarta} \label{fig:google_jakarta}
+    \includegraphics[width=\textwidth]{../figs/jakarta-gmap.png}
+\end{figure}
+}
+
+\frame{
+\begin{figure}[H]
+\centering
+\caption{Sampled Locations in Lagos} \label{fig:google_lagos}
+    \includegraphics[width=\textwidth]{../figs/lagos-gmap.png}
+\end{figure}
+}
+
+\frame{
+\frametitle{Crowdsourced coding}
+\begin{large_enum}
+	\item[-]<2>Only \textit{Master} Mturkers
+	\item[-]<3>5 cents per image
+	\item[-]<4>Randomly checked images to ascertain quality
+	\end{large_enum}
+}
+
+\frame{
+\begin{figure}[h]
+\centering
+\caption{Screenshot of the Bangkok, Jakarta, and Wayne Questionnaire}\label{fig:mturk_bangkok}
+\includegraphics[scale=0.3]{../data/mturk/bangkok_mturk_screenshot.png}
+\end{figure}
+}
+
+\frame{
+\frametitle{Condition of the Roads in Different Places}
+\small
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+city    & potholes & cracks & clear markings & litter & paved sidewalk \\ \midrule
+bangkok & \alert<2>{.06}      & .24    & \alert<2>{.81}            & .06    & .51            \\
+jakarta & .23      & .44    & .34            & .21    & .49            \\
+lagos   & .06      & .20    & .23            & .15    & \alert<3>{.30}  \\
+wayne   & .07      & \alert<4>{.62}    & .60            & .09    & .67  \\ \bottomrule
 \end{tabular}
-\label{table:percentage_contrib_by_race}
 \end{table}
 }
 
+
+\frame{
+\frametitle{Future}
+\begin{large_enum}
+	\item[-]<2>Build a classifier
+	\item[-]<3>Track overtime conditions
+	\item[-]<4>Use satellite data
+	\end{large_enum}
+}
+
+\frame{
+
+\Large{\url{https://github.com/geosensing/streetview}}
+}
+
+\frame{
+\Large{Robustness Check}
+\begin{figure}[h]
+\centering
+\caption{Screenshot of the New Jakarta Questionnaire}\label{fig:mturk_jakarta}
+\includegraphics[scale=0.3]{../data/mturk_new/jakarta_mturk_screenshot.png}
+\end{figure}
+}
 
 \end{document}
